@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://cx7gxbjcrqm1h"]
+
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_624oo"]
+[ext_resource type="PackedScene" uid="uid://usw60kxgyi5x" path="res://scenes/wall/wall.tscn" id="1_nl3di"]
+[ext_resource type="PackedScene" uid="uid://djnlmcoiqdcuy" path="res://scenes/paddle/paddle.tscn" id="2_8uvx0"]
+[ext_resource type="Script" path="res://scenes/paddle/player.gd" id="3_0meti"]
+[ext_resource type="PackedScene" uid="uid://wbika4mwy7nc" path="res://scenes/ball/ball.tscn" id="4_mbu8c"]
+[ext_resource type="Script" path="res://scenes/game/score.gd" id="6_30ubo"]
+[ext_resource type="Script" path="res://scenes/ball/ball.gd" id="6_gomu5"]
+[ext_resource type="PackedScene" uid="uid://bu8hiy4qlao7b" path="res://scenes/pause_menu/pause_menu.tscn" id="8_j6ix4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pcpbv"]
+
+[node name="Game" type="Node2D"]
+process_mode = 1
+script = ExtResource("1_624oo")
+
+[node name="LeftWall" parent="." instance=ExtResource("1_nl3di")]
+
+[node name="Ceiling" parent="." instance=ExtResource("1_nl3di")]
+rotation = -1.5708
+
+[node name="RightWall" parent="." instance=ExtResource("1_nl3di")]
+position = Vector2(960, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_8uvx0")]
+position = Vector2(480, 620)
+script = ExtResource("3_0meti")
+
+[node name="Ball" parent="." instance=ExtResource("4_mbu8c")]
+position = Vector2(480, 610)
+script = ExtResource("6_gomu5")
+
+[node name="Background" type="ColorRect" parent="."]
+show_behind_parent = true
+offset_right = 960.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="Score" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 450.0
+offset_right = 570.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "SCORE: "
+script = ExtResource("6_30ubo")
+
+[node name="PauseMenu" parent="." instance=ExtResource("8_j6ix4")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 480.0
+offset_top = 320.0
+offset_right = 480.0
+offset_bottom = 320.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="LosingZone" type="Area2D" parent="."]
+position = Vector2(480, 675)
+scale = Vector2(48, 3)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LosingZone"]
+shape = SubResource("RectangleShape2D_pcpbv")
+
+[connection signal="toggled_pause" from="." to="PauseMenu" method="_on_game_toggled_pause"]
+[connection signal="collided_with_block" from="Ball" to="Score" method="_on_ball_collided_with_block"]
+[connection signal="body_entered" from="LosingZone" to="." method="_on_losing_zone_body_entered"]

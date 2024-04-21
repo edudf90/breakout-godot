@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvrbeslc1gkj3"]
+
+[ext_resource type="PackedScene" uid="uid://lpehkuvntmoj" path="res://scenes/keyboard/keyboard.tscn" id="1_64vw3"]
+[ext_resource type="Script" path="res://scenes/game_over_screen/game_over_screen.gd" id="1_pxwme"]
+[ext_resource type="Script" path="res://scenes/game_over_screen/final_score.gd" id="2_4elnm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tp4gn"]
+font_size = 24
+font_color = Color(1, 0, 0, 1)
+
+[node name="GameOverScreen" type="Node2D"]
+script = ExtResource("1_pxwme")
+
+[node name="Background" type="ColorRect" parent="."]
+show_behind_parent = true
+offset_right = 960.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 330.0
+offset_top = 70.0
+offset_right = 630.0
+offset_bottom = 570.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="GameOverText" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_tp4gn")
+
+[node name="FinalScore" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "SCORE: "
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_4elnm")
+
+[node name="Leaderboards" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "LEADERBOARDS"
+
+[node name="NewGame" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "NEW GAME
+"
+
+[node name="MainMenu" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "MAIN MENU"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "QUIT
+"
+
+[node name="Keyboard" parent="VBoxContainer" instance=ExtResource("1_64vw3")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[connection signal="text_submitted" from="VBoxContainer/Keyboard" to="." method="_on_keyboard_text_submitted"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmxlownt5irqx"]
+
+[ext_resource type="Script" path="res://scenes/block/block.gd" id="1_57804"]
+[ext_resource type="AudioStream" uid="uid://b0t7leas6psay" path="res://scenes/block/ball_collision2.wav.wav" id="2_8nsas"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_usvxb"]
+
+[node name="Block" type="StaticBody2D"]
+position = Vector2(25, 5)
+scale = Vector2(2.5, 0.5)
+script = ExtResource("1_57804")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_usvxb")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="CollisionSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_8nsas")
+volume_db = -10.0

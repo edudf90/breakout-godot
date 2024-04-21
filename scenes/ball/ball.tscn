@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://wbika4mwy7nc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8rev"]
+
+[node name="Ball" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v8rev")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)

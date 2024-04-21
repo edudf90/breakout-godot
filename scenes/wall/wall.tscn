@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://usw60kxgyi5x"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7d77b"]
+b = Vector2(0, 981)
+
+[node name="Wall" type="StaticBody2D"]
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_7d77b")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 983)
+width = 3.0
