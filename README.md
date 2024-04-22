@@ -1,3 +1,5 @@
+# godot-breakout
+
 This is my implementation of the classic videogame Breakout as part of the "20 games challenge" exercise. 
 
 I've made it using the Godot engine and I got to learn and exercise patterns and specifics of the engine.
